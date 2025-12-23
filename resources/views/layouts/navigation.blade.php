@@ -50,15 +50,17 @@
                     </x-ui.dropdown-trigger>
                     <x-ui.dropdown-content position="top" align="right" class="w-48">
                         <x-ui.dropdown-link :href="route('profile.edit')">
+                            <x-heroicon-c-user class="text-foreground/80 size-4" />
                             Profile
                         </x-ui.dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                         <x-ui.dropdown-link
                             :href="route('logout')"
-                            class="hover:bg-destructive/15! hover:text-destructive"
+                            class="group hover:bg-destructive/15! hover:text-destructive"
                             onclick="event.preventDefault(); this.closest('form').submit();"
                         >
+                            <x-heroicon-c-arrow-left-end-on-rectangle class="text-foreground/80 group-hover:text-destructive size-4" />
                             {{ __('Log Out') }}
                         </x-ui.dropdown-link>
                         </form>
