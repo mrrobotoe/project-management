@@ -9,28 +9,26 @@
         </p>
     </header>
 
-    <x-ui.button variant="danger"
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-ui.button>
+    <x-ui.modal-trigger onclick="delete_account_modal.showModal()" variant="danger">
+        Delete Account
+    </x-ui.modal-trigger>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+
+    <x-ui.modal
+        :isOpen="$errors->userDeletion->isNotEmpty()"
+        id="delete_account_modal"
+    >
+        <x-slot:header class="text-foreground"> Are you sure you want to delete your account?</x-slot:header>
+        <div class="text-foreground/80 text-sm">
+            Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
+        </div>
+        <form method="post" action="{{ route('profile.destroy') }}">
             @csrf
             @method('delete')
-
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
-
             <div class="mt-6">
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-                <x-text-input
+                <x-ui.text-input
                     id="password"
                     name="password"
                     type="password"
@@ -42,14 +40,13 @@
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3">
+                <x-ui.button variant="danger" class="ms-3" @click="$event.preventDefault(); $el.closest('form').submit();">
                     {{ __('Delete Account') }}
-                </x-danger-button>
+                </x-ui.button>
             </div>
         </form>
-    </x-modal>
+        <x-ui.modal-trigger-close variant="outline">
+            {{ __('Cancel') }}
+        </x-ui.modal-trigger-close>
+    </x-ui.modal>
 </section>
