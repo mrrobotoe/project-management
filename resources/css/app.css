@@ -27,7 +27,7 @@
     --color-surface-foreground: var(--surface-foreground);
 
     --color-primary: var(--color-foreground);
-    --color-text-primary-foreground: var(--color-background);
+    --color-primary-foreground: var(--color-background);
 
     --color-nepal-50: oklch(0.977 0.005 228.817);
     --color-nepal-100: oklch(0.943 0.009 242.841);
@@ -56,7 +56,6 @@
     --ring: oklch(0.708 0 0);
     --surface: oklch(0.98 0 0);
     --surface-foreground: var(--foreground);
-
 }
 
 .dark {

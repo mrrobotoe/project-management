@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html x-cloak x-data lang="{{ str_replace('_', '-', app()->getLocale()) }}" :class="$store.darkMode.on ? 'dark' : 'light'">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,12 +40,20 @@
         </div>
         <script>
             // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-
+            // if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            //     document.documentElement.classList.add('dark');
+            // } else {
+            //     document.documentElement.classList.remove('dark');
+            // }
+            //
+            document.addEventListener('alpine:init', () => {
+                Alpine.store('darkMode', {
+                    on: Alpine.$persist(false).as('darkMode_on'),
+                    toggle() {
+                        this.on = ! this.on
+                    }
+                })
+            })
         </script>
 
     </body>
