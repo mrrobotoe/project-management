@@ -40,7 +40,7 @@
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-ui.button variant="danger" class="ms-3" @click="$event.preventDefault(); $el.closest('form').submit();">
+                <x-ui.button variant="danger" class="ms-3" onsubmit="return check_domain_input()">
                     {{ __('Delete Account') }}
                 </x-ui.button>
             </div>
