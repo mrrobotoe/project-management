@@ -10,6 +10,20 @@
             <div class="bg-background border border-border overflow-hidden shadow-xs sm:rounded-lg dark:bg-neutral-900">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+                    <x-ui.modal.wrapper labe="eample">
+                        <x-slot:trigger>
+                            <x-ui.button type="button" @click="openModal()">
+                                Open
+                            </x-ui.button>
+                        </x-slot:trigger>
+
+                        <x-slot:content class="p-6">
+                            <h2 class="text-foreground">
+                                Modal
+                                <x-button variant="outline" @click="closeModal()">Close</x-button>
+                            </h2>
+                        </x-slot:content>
+                    </x-ui.modal.wrapper>
                 </div>
             </div>
         </div>

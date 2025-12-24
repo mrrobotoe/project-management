@@ -15,7 +15,6 @@
 
 
     <x-ui.modal
-        :isOpen="$errors->userDeletion->isNotEmpty()"
         id="delete_account_modal"
     >
         <x-slot:header class="text-foreground"> Are you sure you want to delete your account?</x-slot:header>
@@ -40,7 +39,7 @@
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-ui.button variant="danger" class="ms-3" onsubmit="return check_domain_input()">
+                <x-ui.button variant="danger" class="ms-3">
                     {{ __('Delete Account') }}
                 </x-ui.button>
             </div>
