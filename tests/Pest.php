@@ -13,7 +13,14 @@
 
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature')
+    ->beforeEach(function () {
+        $this->seed([
+            \Database\Seeders\AdminRoleSeeder::class,
+            \Database\Seeders\MemberRoleSeeder::class
+        ]);
+    })
+;
 
 /*
 |--------------------------------------------------------------------------

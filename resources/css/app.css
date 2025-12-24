@@ -121,4 +121,8 @@
         'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-
+@supports(color:lab(0% 0 0)) {
+    .dark {
+        --background: lab(2.75381% 0 0);
+    }
+}

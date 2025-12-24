@@ -3,14 +3,22 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Observers\UserObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+
+#[ObservedBy(UserObserver::class)]
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -44,5 +52,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function profilePhotoUrl()
+    {
+        return 'https://gravatar.com/avatar/' . md5($this->email) . '?s=100';
+    }
+
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class);
+    }
+
+    public function currentTeam(): BelongsTo
+    {
+        return $this->belongsTo(Team::class, 'current_team_id');
     }
 }
