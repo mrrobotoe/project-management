@@ -18,17 +18,23 @@
     @isset($trigger)
         {{ $trigger }}
     @endisset
+    <template x-teleport="body">
+
+    </template>
     <div
         id="modal-backdrop"
+        x-teleport="document.body"
         :data-backdrop="open ? 'open' : 'closed'"
-        class="fixed inset-0 no-scoll flex items-center justify-center transition-all duration-200 data-[backdrop=closed]:invisible data-[backdrop=open]:visible data-[backdrop=open]:bg-primary/40 data-[backdrop=closed]:bg-transparent">
+        class="fixed inset-0 no-scrollbar flex items-center justify-center transition-all duration-200 data-[backdrop=closed]:invisible data-[backdrop=open]:visible data-[backdrop=open]:bg-primary/40 data-[backdrop=closed]:bg-transparent">
         <div
             role="dialog"
             id="modal"
+            x-teleport="document.body"
             aria-modal="true"
             aria-labelledby="{{ $label }}"
             :data-modal="open ? 'open' : 'closed'"
-            class="min-w-md border border-border rounded-lg bg-background z-50 flex items-center justify-center transition-all duration-100 ease-in opacity-95 scale-95 data-[modal=closed]:invisible data-[modal=open]:visible data-[modal=open]:scale-100 data-[modal=open]:translate-y-0 data-[modal=open]:opacity-100"
+            x-on:keydown.escape.window="closeModal"
+            class="min-w-md border border-border rounded-lg bg-background z-50 flex items-center justify-center transition-all duration-100 ease-in opacity-95 scale-95 md:-translate-y-30 data-[modal=closed]:invisible data-[modal=open]:visible data-[modal=open]:scale-100 md:data-[modal=open]:-translate-y-30 data-[modal=open]:opacity-100"
         >
             <div class="p-6">
                 @isset($content)
