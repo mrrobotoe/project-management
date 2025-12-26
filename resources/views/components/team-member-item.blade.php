@@ -2,7 +2,7 @@
 <li class="py-4">
     <div class="flex items-center space-x-2">
         <img src="{{ $member->profilePhotoUrl() }}" alt="{{ $member->name }}" class="size-6 rounded-full"/>
-        <div class="text-sm font-semibold text-gray-900 flex-auto">
+        <div class="text-sm font-semibold text-foreground flex-auto">
             {{ $member->name }} ({{ $member->email }})
         </div>
 
@@ -41,8 +41,8 @@
     </div>
     @endcanany
 
-    <div class="mt-3 text-sm text-gray-500">
-        Role: <span class="text-gray-700">{{ $member->roles->pluck('name')->join(',') }}</span>
+    <div class="mt-3 text-sm text-foreground">
+        Role: <span class="text-foreground/70">{{ $member->roles->pluck('name')->join(',') }}</span>
     </div>
 </li>
 

@@ -14,7 +14,7 @@
 <button {{
     $attributes->merge([
         'type' => 'submit',
-        'class' => "rounded-md shrink-0 $variantClasses"
+        'class' => "inline-flex items-center gap-2 rounded-md shrink-0 [&_svg]:size-4 $variantClasses"
     ])
 }}>
     {{ $slot }}

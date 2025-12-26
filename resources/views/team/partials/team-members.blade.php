@@ -1,16 +1,16 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium text-foreground">
             {{ __('Team Members') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-foreground/70">
             {{ __('These are the members of your team.') }}
         </p>
     </header>
 
     <div class="mt-6">
-        <ul class="divide-y divide-gray-200">
+        <ul class="divide-y divide-border">
             @foreach($team->members as $member)
                 <x-team-member-item :team="$team" :member="$member"  />
             @endforeach

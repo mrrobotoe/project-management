@@ -7,9 +7,15 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-background border border-border overflow-hidden shadow-xs sm:rounded-lg dark:bg-neutral-900">
+            <div class="bg-background border border-border shadow-xs sm:rounded-lg dark:bg-neutral-900">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+
+                    <x-ui.combobox>
+                        <x-slot:label>
+                            Roles
+                        </x-slot:label>
+                    </x-ui.combobox>
                 </div>
             </div>
         </div>
