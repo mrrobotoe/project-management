@@ -32,7 +32,7 @@ $alignmentClasses = match ($align) {
     {{ $position }}: anchor(--my-anchor-in-line outside);
     "
     {{ $attributes->merge(['class' =>
-        'py-2 px-2 bg-background border border-border rounded-md shadow-sm ' . $alignmentClasses,
+        'p-1 bg-background border border-border rounded-md z-50 ' . $alignmentClasses,
     ]) }}
 >
     {{ $slot }}

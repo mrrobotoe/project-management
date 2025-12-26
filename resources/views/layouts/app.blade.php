@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+@php
+    $options = [];
+
+    $teams = auth()->user()->teams;
+    foreach($teams as $team) {
+        $options[] = (object) ['label' => $team->name, 'value' => $team->name];
+    }
+
+    $selectedOption = (object) [
+        'label' => auth()->user()->currentTeam->name,
+        'value' => auth()->user()->currentTeam->name
+    ]
+
+
+@endphp
+
+    <!DOCTYPE html>
 <html x-cloak x-data lang="{{ str_replace('_', '-', app()->getLocale()) }}" :class="$store.darkMode.on ? 'dark' : 'light'">
     <head>
         <meta charset="utf-8">
@@ -27,8 +43,19 @@
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-background dark:bg-neutral-900 shadow-sm">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                         {{ $header }}
+                        <div>
+                            <x-ui.combobox :list-options="$options" :selected-option="$selectedOption" name="teams" id="team">
+                                <template x-for="(item, index) in options" x-bind:key="item.value">
+                                    <form method="POST" action="{{ route('team.set-current', auth()->user()->current_team_id) }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <x-ui.combobox.item item="item" />
+                                    </form>
+                                </template>
+                            </x-ui.combobox>
+                        </div>
                     </div>
                 </header>
             @endisset

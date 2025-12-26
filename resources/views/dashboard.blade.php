@@ -1,3 +1,14 @@
+
+@php
+    $options = [];
+
+    $teams = auth()->user()->teams;
+    foreach($teams as $team) {
+        $options[] = ['label' => $team->name, 'value' => $team->name];
+    }
+@endphp
+
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -10,6 +21,7 @@
             <div class="bg-background border border-border shadow-xs sm:rounded-lg dark:bg-neutral-900">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+
                 </div>
             </div>
         </div>
