@@ -23,5 +23,6 @@ class UserObserver
     public function deleting(User $user)
     {
         $user->teams()->detach();
+        $user->roles()->detach();
     }
 }

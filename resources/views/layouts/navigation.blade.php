@@ -51,6 +51,10 @@
                             <x-heroicon-c-user class="text-foreground/80 size-4" />
                             Profile
                         </x-ui.dropdown-link>
+                        <x-ui.dropdown-link :href="route('team.edit', auth()->user()->currentTeam->id)">
+                            <x-heroicon-c-user-group class="text-foreground/80 size-4" />
+                            Team
+                        </x-ui.dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                         <x-ui.dropdown-link

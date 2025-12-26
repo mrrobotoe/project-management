@@ -22,7 +22,7 @@
 <button
     {{ $attributes->merge([
     'type' => $type,
-    'class' => 'inline-flex items-center justify-center rounded-lg font-medium text-sm capitalize focus-visible:outline-hidden focus-visible:ring-3 transition ease-in-out duration-150 [&_svg]:size-4 ' . $sizeClasses . ' ' . $variantClasses]) }}
+    'class' => 'inline-flex items-center select-none justify-center rounded-lg font-medium text-sm capitalize focus-visible:outline-hidden focus-visible:ring-3 transition ease-in-out duration-150 [&_svg]:size-4 ' . $sizeClasses . ' ' . $variantClasses]) }}
 >
     {{ $slot }}
 </button>

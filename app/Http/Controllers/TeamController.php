@@ -47,7 +47,7 @@ class TeamController extends Controller
 
     public function edit()
     {
-        return 'Edit';
+        return view('team.edit', ['team' => auth()->user()->currentTeam]);
     }
 
     public function create()

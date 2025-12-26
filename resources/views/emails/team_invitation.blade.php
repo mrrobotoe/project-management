@@ -1,10 +1,8 @@
 <x-mail::message>
-# Introduction
+# You have been invited to {{ $teamInvite->team->name }} team.
 
-The body of your message.
-
-<x-mail::button :url="''">
-Button Text
+<x-mail::button :url="$url">
+    Accept invite
 </x-mail::button>
 
 Thanks,<br>
