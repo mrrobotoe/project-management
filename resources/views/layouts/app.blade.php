@@ -14,7 +14,7 @@
 
 @endphp
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html x-cloak x-data lang="{{ str_replace('_', '-', app()->getLocale()) }}" :class="$store.darkMode.on ? 'dark' : 'light'">
     <head>
         <meta charset="utf-8">
@@ -46,7 +46,7 @@
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                         {{ $header }}
                         <div class="flex gap-2 items-center">
-                            <span class="text-sm font-semibold min-w-fit">Current Team: </span>
+                            <span class="text-sm text-foreground font-semibold min-w-fit">Current Team: </span>
                             <x-ui.combobox :list-options="$options" :selected-option="$selectedOption" name="teams" id="team">
                                 <template x-for="(item, index) in options" x-bind:key="item.value">
                                     <form method="POST" :action="`{{ route('team.set-current', ':id') }}`.replace(':id', item.id)">

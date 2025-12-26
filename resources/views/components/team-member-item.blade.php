@@ -1,4 +1,18 @@
-@php use Spatie\Permission\Models\Role; @endphp
+@php
+    use Spatie\Permission\Models\Role;
+    $options = [];
+    $roles = Role::get();
+
+    foreach($roles as $role) {
+        $options[] = (object) ['label' => $role->name, 'value' => $role->name, 'id' => $role->name];
+    }
+
+    $role = auth()->user()->getRoleNames()->first();
+    $selectedOption = (object) [
+        'label' => $role,
+        'value' => $role
+    ]
+@endphp
 <li class="py-4">
     <div class="flex items-center space-x-2">
         <img src="{{ $member->profilePhotoUrl() }}" alt="{{ $member->name }}" class="size-6 rounded-full"/>
@@ -58,16 +72,22 @@
 
             <div class="mt-6">
                 <x-input-label for="role" :value="__('Role')" class="sr-only" />
-                <x-select-input class="w-full" name="role">
+                <x-ui.combobox :list-options="$options" :selected-option="$selectedOption" name="teams" id="team">
+                    <template x-for="(item, index) in options" x-bind:key="item.value">
+                        <x-ui.combobox.item item="item"/>
+                    </template>
+                </x-ui.combobox>
+                <x-ui.select class="w-full" name="role">
                     @foreach (Role::get() as $role)
                         <option
                             value="{{ $role->name }}"
                             @selected($member->hasRole($role))
+                            class="text-sm text-foreground p-1"
                         >
                             {{ $role->name }}
                         </option>
                     @endforeach
-                </x-select-input>
+                </x-ui.select>
             </div>
 
             <div class="mt-6 flex justify-end">

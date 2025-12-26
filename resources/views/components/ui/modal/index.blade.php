@@ -2,7 +2,7 @@
 <div
     x-id=['modal']
     x-data="{
-        open: $persist('open'),
+        open: $persist(true, 'open'),
         openModal() {
             if (!this.open) {
                 this.open = true;
@@ -32,15 +32,15 @@
                 :data-modal="open ? 'open' : 'closed'"
                 x-on:keydown.escape.window="closeModal"
                 x-show="open"
-                x-transition:enter="transition ease-in duration-150"
-                x-transition:enter-start="opacity-0 scale-95"
-                x-transition:enter-end="opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-150"
-                x-transition:leave-start="opacity-100 scale-100"
-                x-transition:leave-end="opacity-0 scale-95"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-on:click.away="closeModal"
                 x-trap.inert.noscroll="open"
-                class="min-w-md max-w-lg p-6 border border-foreground/10 shadow-md rounded-lg bg-background z-50 flex flex-col space-y-2 shadow-lg dark:bg-background"
+                class="min-w-md max-w-lg p-6 border border-foreground/10 rounded-lg bg-background z-50 flex flex-col space-y-2 shadow-lg"
             >
                 <div>
                     @isset($header)

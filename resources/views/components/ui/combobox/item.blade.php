@@ -1,4 +1,4 @@
-<li {{ $attributes->merge(['class' => "w-full combobox-option inline-flex justify-between gap-6 bg-transparent px-4 py-2 text-sm text-on-surface select-none rounded-md hover:bg-input/50 focus-visible:bg-input/50 focus-visible:outline-hidden dark:focus-visible:bg-surface-alt/10"]) }} role="option" x-on:click="setSelectedOption(item)" x-on:keydown.enter="setSelectedOption(item)" x-bind:id="'option-' + index" tabindex="0" >
+<li {{ $attributes->merge(['class' => "w-full combobox-option inline-flex justify-between gap-6 bg-transparent px-4 py-2 text-sm text-foreground select-none rounded-md hover:bg-input/50 focus-visible:bg-input/50 focus-visible:outline-hidden"]) }} role="option" x-on:click="setSelectedOption(item)" x-on:keydown.enter="setSelectedOption(item)" x-bind:id="'option-' + index" tabindex="0" >
     <!-- Label  -->
     <span x-bind:class="selectedOption.value == item.value ? 'font-bold' : null" x-text="item.label"></span>
     <!-- Screen reader 'selected' indicator  -->

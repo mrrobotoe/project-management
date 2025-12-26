@@ -60,7 +60,7 @@
                             @csrf
                         <x-ui.dropdown-link
                             :href="route('logout')"
-                            class="group hover:bg-destructive/15! hover:text-destructive"
+                            class="group hover:bg-destructive/5! hover:text-destructive"
                             onclick="event.preventDefault(); this.closest('form').submit();"
                         >
                             <x-heroicon-c-arrow-left-end-on-rectangle class="text-foreground/80 group-hover:text-destructive size-4" />
