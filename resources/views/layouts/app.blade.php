@@ -3,12 +3,12 @@
 
     $teams = auth()->user()->teams;
     foreach($teams as $team) {
-        $options[] = (object) ['label' => $team->name, 'value' => $team->name];
+        $options[] = (object) ['label' => $team->name, 'value' => $team->name, 'id' => $team->id];
     }
 
     $selectedOption = (object) [
         'label' => auth()->user()->currentTeam->name,
-        'value' => auth()->user()->currentTeam->name
+        'value' => auth()->user()->currentTeam->name,
     ]
 
 
@@ -45,13 +45,14 @@
                 <header class="bg-background dark:bg-neutral-900 shadow-sm">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                         {{ $header }}
-                        <div>
+                        <div class="flex gap-2 items-center">
+                            <span class="text-sm font-semibold min-w-fit">Current Team: </span>
                             <x-ui.combobox :list-options="$options" :selected-option="$selectedOption" name="teams" id="team">
                                 <template x-for="(item, index) in options" x-bind:key="item.value">
-                                    <form method="POST" action="{{ route('team.set-current', auth()->user()->current_team_id) }}">
+                                    <form method="POST" :action="`{{ route('team.set-current', ':id') }}`.replace(':id', item.id)">
                                         @csrf
                                         @method('PATCH')
-                                        <x-ui.combobox.item item="item" />
+                                        <x-ui.combobox.item item="item" @click="$el.closest('form').submit()"/>
                                     </form>
                                 </template>
                             </x-ui.combobox>
