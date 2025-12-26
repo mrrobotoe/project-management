@@ -55,6 +55,7 @@
                             <x-heroicon-c-user-group class="text-foreground/80 size-4" />
                             Team
                         </x-ui.dropdown-link>
+                        <x-ui.dropdown-separator class="-mx-2 my-2" />
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                         <x-ui.dropdown-link

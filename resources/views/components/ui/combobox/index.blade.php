@@ -1,5 +1,7 @@
 @props([
-    'name' => ''
+    'id',
+    'name',
+    'selectedOption' => null
 ])
 
 <div x-data="{
@@ -86,7 +88,7 @@
     @endisset
     <div class="relative">
         <!-- trigger button  -->
-        <x-button variant="outline" type="button" role="combobox" aria-haspopup="listbox" aria-controls="industriesList" x-on:click="isOpen = ! isOpen" x-on:keydown.down.prevent="openedWithKeyboard = true" x-on:keydown.enter.prevent="openedWithKeyboard = true" x-on:keydown.space.prevent="openedWithKeyboard = true" x-bind:aria-label="selectedOption ? selectedOption.value : 'Please Select'" x-bind:aria-expanded="isOpen || openedWithKeyboard">
+        <x-button variant="outline" type="button" role="combobox" aria-haspopup="listbox" aria-controls="{{ $name . 'List' }}" x-on:click="isOpen = ! isOpen" x-on:keydown.down.prevent="openedWithKeyboard = true" x-on:keydown.enter.prevent="openedWithKeyboard = true" x-on:keydown.space.prevent="openedWithKeyboard = true" x-bind:aria-label="selectedOption ? selectedOption.value : 'Please Select'" x-bind:aria-expanded="isOpen || openedWithKeyboard">
             <span class="text-sm font-normal" x-text="selectedOption ? selectedOption.value : 'Please Select'"></span>
             <!-- Chevron  -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
@@ -95,8 +97,8 @@
         </x-button>
 
         <!-- hidden input to grab the selected value  -->
-        <input id="industry" name="industry" type="text" x-ref="hiddenTextField" hidden/>
-        <ul x-cloak x-show="isOpen || openedWithKeyboard" id="industriesList" class="absolute z-10 left-0 top-11 flex max-h-44 w-full p-1.5 flex-col overflow-hidden overflow-y-auto scroll-smooth border-border bg-background dark:bg-neutral-800 rounded-md border" role="listbox" aria-label="industries list" x-on:click.outside="isOpen = false, openedWithKeyboard = false" x-on:keydown.down.prevent="$focus.wrap().next()" x-on:keydown.up.prevent="$focus.wrap().previous()" x-transition x-trap="openedWithKeyboard">
+        <input id="{{ $id }}" name="{{ $name }}" type="text" x-ref="hiddenTextField" hidden/>
+        <ul x-cloak x-show="isOpen || openedWithKeyboard" id="{{ $name . 'List' }}" class="absolute z-10 left-0 top-11 flex max-h-44 w-full p-1.5 flex-col overflow-hidden overflow-y-auto scroll-smooth border-border bg-background shadow-md dark:bg-neutral-800 rounded-md border" role="listbox" aria-label="{{ $name . ' list' }}" x-on:click.outside="isOpen = false, openedWithKeyboard = false" x-on:keydown.down.prevent="$focus.wrap().next()" x-on:keydown.up.prevent="$focus.wrap().previous()" x-transition x-trap="openedWithKeyboard">
             <template x-for="(item, index) in options" x-bind:key="item.value">
                 <li class="combobox-option inline-flex justify-between gap-6 bg-transparent px-4 py-2 text-sm text-on-surface select-none rounded-md hover:bg-input/50 focus-visible:bg-input/50 focus-visible:outline-hidden dark:focus-visible:bg-surface-alt/10" role="option" x-on:click="setSelectedOption(item)" x-on:keydown.enter="setSelectedOption(item)" x-bind:id="'option-' + index" tabindex="0" >
                     <!-- Label  -->
